@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useState } from "react";
 
-const Encrypt = () => {
+const Secret = () => {
   // const [response, setResponse] = useState(null);
 
   const handleOnEncrypt = () => {
@@ -32,8 +32,8 @@ const Encrypt = () => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Encrypt</CardTitle>
-        <CardDescription>Paste the text and click encrypt</CardDescription>
+        <CardTitle>Add Secret</CardTitle>
+        <CardDescription>Type Secret and Submit</CardDescription>
       </CardHeader>
       <CardContent>
         <form>
@@ -47,21 +47,13 @@ const Encrypt = () => {
       </CardContent>
       <CardContent className="flex-col gap-2">
         <Button type="button" onClick={handleOnEncrypt}>
-          Encrypt
+          Add Secret
         </Button>
       </CardContent>
       <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="message">Output</Label>
-              <Textarea readOnly className="resize-none h-40" />
-            </div>
-          </div>
-        </form>
       </CardContent>
     </Card>
   );
 };
 
-export default Encrypt;
+export default Secret;
