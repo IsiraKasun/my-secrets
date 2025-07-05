@@ -18,12 +18,11 @@ FROM node AS runner
 
 WORKDIR /app
 
+# Install "serve" globally
+RUN npm install -g serve
+
+# Copy only the build output
 COPY --from=builder /app/dist ./dist
 
-COPY --from=builder /app/package*.json ./
-
-RUN npm install --production
-
 EXPOSE 8080
-
-CMD ["npm", "run", "preview"]
+CMD ["serve", "-s", "dist", "-l", "8080"]

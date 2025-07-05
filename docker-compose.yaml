@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes: 
+      - data:/data/db
+    ports: 
+      - 27017:27017
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=isira
+    - MONGO_INITDB_ROOT_PASSWORD=secret
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - MONGODB_USERNAME=isira
+      - MONGODB_PASSWORD=secret
+    depends_on:
+      - mongodb
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+volumes:
+  data:
